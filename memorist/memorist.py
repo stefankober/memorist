@@ -18,8 +18,6 @@ for ROWS in range(0, NUMBER_OF_ROWS):
         SUBVALUES.append(random.randint(100, 999))
     VALUES.append(SUBVALUES)
 
-print(VALUES)
-
 font = pygame.font.Font(None, 32)
 TEXT=[]
 
@@ -28,7 +26,14 @@ for ROWS in range(0, NUMBER_OF_ROWS):
     for COLS in range(0, NUMBER_OF_COLS):
         SUBTEXT.append(font.render(str(VALUES[ROWS][COLS]), True, BLUE))
     TEXT.append(SUBTEXT)
-print(TEXT)
+
+def please_write_down():
+    if random.randint(0,1) == 0:
+        RANDOM_COL = random.randint(0, NUMBER_OF_COLS-1)
+        print("column" + str(RANDOM_COL+1))
+    else:
+        RANDOM_ROW = random.randint(0, NUMBER_OF_ROWS-1)
+        print("row" + str(RANDOM_ROW+1))
 
 pygame.display.set_caption('Memorist')
 while True: # main game loop
@@ -48,6 +53,8 @@ while True: # main game loop
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             SCREEN.fill((255, 255, 255))
             pygame.display.flip()
+            please_write_down()
+
             while not DONE:
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
